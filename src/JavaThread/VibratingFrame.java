@@ -6,40 +6,35 @@ import javax.swing.*;
 import java.util.Random;
 
 public class VibratingFrame extends JFrame implements Runnable{
-   private Thread th; // Áøµ¿ÇÏ´Â ½º·¹µå
+   private Thread th; 
    public VibratingFrame() {
-      setTitle("Áøµ¿ÇÏ´Â ÇÁ·¹ÀÓ ¸¸µé±â");
+      setTitle("ì§„ë™í•˜ëŠ” í”„ë ˆì„ ë§Œë“¤ê¸°");
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setSize(200,200);
-      setLocation(300,300);// ÇÁ·¹ÀÓÀÇ À§Ä¡¸¦ screenÀÇ (300,300)¿¡ ¼³Á¤
+      setLocation(300,300);
       setVisible(true);
       
       getContentPane().addMouseListener(new MouseAdapter() {
          public void mousePressed(MouseEvent e) {
-            if(!th.isAlive())return; //ÀÌ¹Ì ½º·¹µå°¡ Á¾·áÇß´Ù¸é ±×³É ¸®ÅÏ
-            th.interrupt();// Áøµ¿ ½º·¹µå¿¡°Ô InterruptedExceptionÀ» º¸³» °­Á¦ Á¾·á
+            if(!th.isAlive())return; 
+            //Q1: ì§„ë™ ìŠ¤ë ˆë“œ ê°•ì œ ì¢…ë£Œ
          }
       });
       
-      th=new Thread(this); // Áøµ¿ ½º·¹µå °´Ã¼ »ı¼º
-      th.start(); // Áøµ¿ ½ÃÀÛ
+      //Q2: start í•¨ìˆ˜ í˜¸ì¶œ ì¤€ë¹„
+      th.start(); 
 
    }
    
    @Override
-   public void run() { // ÇÁ·¹ÀÓÀÇ Áøµ¿À» ÀÏÀ¸Å°±â À§ÇØ 20ms¸¶´Ù ÇÁ·¹ÀÓÀÇ À§Ä¡¸¦ ·£´ıÇÏ°Ô ÀÌµ¿
+   public void run() { 
       
-      Random r = new Random(); // Áøµ¿ÇÒ À§Ä¡¸¦ ·£´ıÇÏ°Ô ¹ß»ı½ÃÅ³ ·£´ı °´Ã¼ »ı¼º
+      Random r = new Random(); 
       while(true) {
-         try {
-            Thread.sleep(20); // 20ms ÀáÀÚ±â
-         }
-         catch(InterruptedException e) {
-            return; // ¸®ÅÏÇÏ¸é ½º·¹µå Á¾·á
-         }
-         int x= getX()+ r.nextInt()%5; //»õ À§Ä¡ x
-         int y= getY()+ r.nextInt()%5; //»õ À§Ä¡ y
-         setLocation(x,y); // ÇÁ·¹ÀÓÀÇ À§Ä¡ ÀÌµ¿, Áøµ¿ È¿°ú
+         //Q3: ì˜ˆì™¸ì²˜ë¦¬
+         int x= getX()+ r.nextInt()%5; 
+         int y= getY()+ r.nextInt()%5; 
+         setLocation(x,y); 
             
          }
       }
