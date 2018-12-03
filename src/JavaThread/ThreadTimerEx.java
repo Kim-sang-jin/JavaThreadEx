@@ -16,10 +16,7 @@ class TimerThread extends Thread{
       while(true) {
          timerLabel.setText(Integer.toString(n));
          n++;
-         try {
-            Thread.sleep(1000);
-         }catch(InterruptedException e) {
-            return;
+         //AfterWork (ì˜ˆì™¸ì²˜ë¦¬)
          }
       }
    }
@@ -27,7 +24,7 @@ class TimerThread extends Thread{
 
 public class ThreadTimerEx extends JFrame{
    public ThreadTimerEx() {
-      setTitle("Thread¸¦ »ó¼Ó¹ŞÀº Å¸ÀÌ¸Ó ½º·¹µå ¿¹Á¦");
+      setTitle("Threadë¥¼ ìƒì†ë°›ì€ íƒ€ì´ë¨¸ ìŠ¤ë ˆë“œ ì˜ˆì œ");
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       Container c = getContentPane();
       c.setLayout(new FlowLayout());
@@ -36,12 +33,12 @@ public class ThreadTimerEx extends JFrame{
       timerLabel.setFont(new Font("Gothic", Font.ITALIC, 80));
       c.add(timerLabel);
       
-      TimerThread th = new TimerThread(timerLabel);
+      //Q1: ìŠ¤ë ˆë“œ ê°ì²´ ì„ ì–¸
       
       setSize(250, 150);
       setVisible(true);
       
-      th.start();
+      //Q2: ìŠ¤ë ˆë“œ ì‹¤í–‰ ìš”ì²­
    }
 
    public static void main(String[] args) {
