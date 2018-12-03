@@ -21,28 +21,10 @@ class MyLabel extends JLabel{
 	}
 	
 	synchronized void fill() {
-		if(barSize == maxBarSize) {
-			try {
-				wait();
-			}
-			catch(InterruptedException e) {return;
-		}
-	}
-		barSize++;
-		repaint();
-		notify();
+		//Q1: 바의 길이를 늘려 다시 그리고, 크기가 최대이면 대기
 	}
 	synchronized void consume() {
-		if(barSize == 0) {
-			try {
-				wait();
-			}catch(InterruptedException e) {
-				return;
-			}
-		}
-		barSize--;
-		repaint();
-		notify();
+		//Q2: 바의 길이를 줄여 다시 그리고, 크기가 0이면 대기
 	}
 }
 class ConsumerThread extends Thread{
@@ -89,11 +71,10 @@ public class TabAndThreadEx extends JFrame {
 		c.setFocusable(true);
 		c.requestFocus();
 		
-		ConsumerThread th = new ConsumerThread(bar);
-		th.start();
+		//Q3: 스레드 실행 시 필수!!
 	}
 
 	public static void main(String[] args) {
-		new TabAndThreadEx("�ƹ�Ű�� ���� ���� �� ä���");
+		new TabAndThreadEx("아무키나 빨리 눌러 바 채우기");
 	}
 }
