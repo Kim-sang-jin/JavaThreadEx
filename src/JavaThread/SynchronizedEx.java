@@ -2,7 +2,7 @@ package JavaThread;
 
 public class SynchronizedEx {
 	   public static void main(String[] args) {
-	      SharedPrinter p= new SharedPrinter(); // °øÀ¯µ¥ÀÌÅÍ »ı¼º
+	      SharedPrinter p= new SharedPrinter(); 
 	      String [] engText= { "Wise men say,",
 	                      "only fools rush in",
 	                      "But I can't help,",
@@ -11,44 +11,39 @@ public class SynchronizedEx {
 	                      "Would it be a sin?",
 	                      "If I can't help,",
 	                      "falling in love with you"};
-	      String[]korText= {"µ¿ÇØ¹°°ú ¹éµÎ»êÀÌ ¸¶¸£°í ´âµµ·Ï,",
-	                     "ÇÏ´À´ÔÀÌ º¸¿ìÇÏ»ç ¿ì¸® ³ª¶ó ¸¸¼¼",
-	                     "¹«±ÃÈ­ »ïÃµ¸® È­·Á°­»ê,",
-	                     "´ëÇÑ »ç¶÷ ´ëÇÑÀ¸·Î ±æÀÌ º¸ÀüÇÏ¼¼",
-	                     "³²»ê À§¿¡ Àú ¼Ò³ª¹« Ã¶°©À» µÎ¸¥µí ",
-	                     "¹Ù¶÷¼­¸® ºÒº¯ÇÔÀº ¿ì¸® ±â»óÀÏ¼¼.",
-	                     "¹«±ÃÈ­ »ïÃµ¸® È­·Á°­»ê,",
-	                     "´ëÇÑ »ç¶÷ ´ëÇÑÀ¸·Î ±æÀÌ º¸ÀüÇÏ¼¼"};
-	      // ½º·¹µå »ı¼º½Ã °øÀ¯ ÇÁ¸°ÅÍÀÇ ÁÖ¼Ò¸¦ ¾Ë·ÁÁØ´Ù. µÎ ½º·¹µå´Â °øÀ¯ ÇÁ¸°ÅÍ p¿¡ µ¿½Ã¿¡ Á¢±ÙÇÑ´Ù.
-	      Thread th1=new WorkerThread(p,engText); // ¿µ¹® Ãâ·Â ½º·¹µå
-	      Thread th2=new WorkerThread(p,korText); // ±¹¹® Ãâ·Â ½º·¹µå
-	      
-	      // µÎ ½º·¹µå¸¦ ½ÇÇà½ÃÅ²´Ù.
-	      th1.start(); th2.start();
+	      String[]korText= {"ë™í•´ë¬¼ê³¼ ë°±ë‘ì‚°ì´ ë§ˆë¥´ê³  ë‹³ë„ë¡,",
+	                     "í•˜ëŠë‹˜ì´ ë³´ìš°í•˜ì‚¬ ìš°ë¦¬ ë‚˜ë¼ ë§Œì„¸",
+	                     "ë¬´ê¶í™” ì‚¼ì²œë¦¬ í™”ë ¤ê°•ì‚°,",
+	                     "ëŒ€í•œ ì‚¬ëŒ ëŒ€í•œìœ¼ë¡œ ê¸¸ì´ ë³´ì „í•˜ì„¸",
+	                     "ë‚¨ì‚° ìœ„ì— ì € ì†Œë‚˜ë¬´ ì² ê°‘ì„ ë‘ë¥¸ë“¯ ",
+	                     "ë°”ëŒì„œë¦¬ ë¶ˆë³€í•¨ì€ ìš°ë¦¬ ê¸°ìƒì¼ì„¸.",
+	                     "ë¬´ê¶í™” ì‚¼ì²œë¦¬ í™”ë ¤ê°•ì‚°,",
+	                     "ëŒ€í•œ ì‚¬ëŒ ëŒ€í•œìœ¼ë¡œ ê¸¸ì´ ë³´ì „í•˜ì„¸"};
+		   
+	      //Q1: ìŠ¤ë ˆë“œ ê°ì²´ 2ê°œ ìƒì„± ë° ìš”ì²­
 	  }
 }
 
-class SharedPrinter{ // µÎ WorkerThread ½º·¹µå¿¡ ÀÇÇØ µ¿½Ã Á¢±ÙµÇ´Â °øÀ¯ ÇÁ¸°ÅÍ
-	// synchronized¸¦ »ı·«ÇÏ¸é ÇÑ±Û°ú ¿µ¾î°¡ ÇÑÁÙ¿¡ ¼¯¿© Ãâ·ÂµÇ´Â °æ¿ì°¡ ¹ß»ıÇÑ´Ù.
-	synchronized void print(String text) {
-	   //Thread.yield();
+class SharedPrinter{ // ë‘ WorkerThread ìŠ¤ë ˆë“œì— ì˜í•´ ë™ì‹œ ì ‘ê·¼ë˜ëŠ” ê³µìœ  í”„ë¦°í„°
+	// synchronizedë¥¼ ìƒëµí•˜ë©´ í•œê¸€ê³¼ ì˜ì–´ê°€ í•œì¤„ì— ì„ì—¬ ì¶œë ¥ë˜ëŠ” ê²½ìš°ê°€ ë°œìƒí•œë‹¤.
+	/*Q2: í•¨ìˆ˜ print()ì˜ ì ‘ê·¼ ì§€ì •ì*/ print(String text) {
+	   //Thread.yield(); ì„ ì–¸ ì‹œ ë” ë§ì€ ì¶©ëŒ ë°œìƒ
 	   for(int i=0; i<text.length();i++)
 	      System.out.print(text.charAt(i));
 	   System.out.println();    
 	}
 }
 
-class WorkerThread extends Thread{ //½º·¹µå Å¬·¡½º
-	private SharedPrinter p; //°øÀ¯ ÇÁ¸°ÅÍ ÁÖ¼Ò
+class WorkerThread extends Thread{ 
+	private SharedPrinter p; 
 	private String[] text;
 	   
-	public WorkerThread(SharedPrinter p,String[] text) { //°øÀ¯ ÇÁ¸°ÅÍ ÁÖ¼Ò¿Í ÅØ½ºÆ® Àü´Ş ¹ŞÀ½
-	   this.p=p; this.text=text;    
+	public WorkerThread(SharedPrinter p,String[] text) { 
+	   //Q3: ê³µìœ  í”„ë¦°í„° ì£¼ì†Œì™€ í…ìŠ¤íŠ¸ ì „ë‹¬ ë°›ìŒ    
 	}
-	// ½º·¹µå´Â ¹İº¹ÀûÀ¸·Î °øÀ¯ ÇÁ¸°ÅÍ¿¡ 10¹ø Á¢±ÙÇÏ¿© text[]¸¦ Ãâ·ÂÇÑ´Ù.
 	@Override
 	public void run() {
-	   for(int i=0;i<text.length; i++) // ÇÑ ÁÙ¾¿ Ãâ·Â
-	      p.print(text[i]); // °øÀ¯ ÇÁ¸°ÅÍ¿¡ Ãâ·Â
+	   for(int i=0;i<text.length; i++) // í•œ ì¤„ì”© ì¶œë ¥
+	      p.print(text[i]); // ê³µìœ  í”„ë¦°í„°ì— ì¶œë ¥
 	}
 }
